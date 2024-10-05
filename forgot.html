@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+        <h2 class="text-2xl font-semibold text-center text-gray-800">Forgot Password</h2>
+        <p class="mt-2 text-center text-gray-600">Enter your email address to receive a password reset link.</p>
+
+        <form id="resetPasswordForm" class="mt-6">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" id="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-blue-500 focus:border-blue-500" placeholder="you@example.com">
+                <span id="emailError" class="text-red-500 text-sm hidden">Please enter a valid email address.</span>
+            </div>
+
+            <button type="submit" class="w-full mt-4 bg-blue-600 text-white p-2 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300">Send Reset Link</button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">Remember your password? <a href="login.html" class="text-blue-600 hover:underline">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('resetPasswordForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const email = emailInput.value;
+
+            // Basic email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailError.classList.remove('hidden');
+                return;
+            } else {
+                emailError.classList.add('hidden');
+            }
+
+            // Here you would typically send the email to your server for processing
+            console.log('Reset link sent to:', email);
+            
+            // Redirect to the login page after successful submission
+            alert("Reset link sent! Check your email.");
+            window.location.href = "login.html"; // Change to your actual login page URL
+        });
+    </script>
+
+</body>
+</html>

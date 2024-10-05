@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Raising Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center">Raise a Complaint</h2>
+        <form id="complaintForm" onsubmit="return validateForm()">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your Name" required>
+                <p id="nameError" class="text-red-500 text-xs hidden">Please enter your name.</p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="year">Year</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="year" type="text" placeholder="Year (e.g., 1st Year)" required>
+                <p id="yearError" class="text-red-500 text-xs hidden">Please enter a valid year.</p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="department">Department</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="department" type="text" placeholder="Department Name" required>
+                <p id="departmentError" class="text-red-500 text-xs hidden">Please enter your department.</p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="complaintType">Type of Complaint</label>
+                <select id="complaintType" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Type</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Structural">Structural</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Detailed Description</label>
+                <textarea id="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" placeholder="Describe the issue..." required></textarea>
+                <p id="descriptionError" class="text-red-500 text-xs hidden">Please provide a detailed description.</p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="roomNumber">Room Number</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="roomNumber" type="text" placeholder="Room Number" required>
+                <p id="roomError" class="text-red-500 text-xs hidden">Please enter a room number.</p>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Submit Complaint
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Clear previous error messages
+            document.getElementById('nameError').classList.add('hidden');
+            document.getElementById('yearError').classList.add('hidden');
+            document.getElementById('departmentError').classList.add('hidden');
+            document.getElementById('descriptionError').classList.add('hidden');
+            document.getElementById('roomError').classList.add('hidden');
+
+            // Get input values
+            const name = document.getElementById('name').value.trim();
+            const year = document.getElementById('year').value.trim();
+            const department = document.getElementById('department').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const roomNumber = document.getElementById('roomNumber').value.trim();
+
+            // Name validation
+            if (name === "") {
+                document.getElementById('nameError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Year validation (should be numeric)
+            if (isNaN(year) || year === "") {
+                document.getElementById('yearError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Department validation
+            if (department === "") {
+                document.getElementById('departmentError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Description validation
+            if (description === "") {
+                document.getElementById('descriptionError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Room Number validation
+            if (roomNumber === "") {
+                document.getElementById('roomError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            return isValid; // Allow or prevent form submission
+        }
+    </script>
+
+</body>
+</html>
